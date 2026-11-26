@@ -16,7 +16,7 @@ class Neumann(BC):
         BC.__init__(self, value)
 
 
-def FDMd2dx2 (L , BCleft , BCright , N = 100)
+def FDMd2dx2 (L , BCleft , BCright , N = 100):
     if BCleft is Dirichlet:
         BCleft_value = BCleft.value
     if BCright is Dirichlet:
@@ -26,10 +26,13 @@ def FDMd2dx2 (L , BCleft , BCright , N = 100)
     if BCright is Neumann:
         BCright_derivative = BCright.value
     
-    dx = L / (N - 1)
-    grid = np.linspace(0, L, N)
+    dx = L / (N + 1)
+    grid = np.linspace(0, L, N+1)
     A = np.zeros((N, N))
     BCcorr = np.zeros(N)
+    BCcorr[0] = BCleft_value/ dx**2
+    BCcorr[N-1] = BCright_value/ dx**2
+    
 
 
 
