@@ -28,12 +28,16 @@ def FDMd2dx2 (L , BCleft , BCright , N = 100):
     
     dx = L / (N + 1)
     grid = np.linspace(0, L, N+1)
-    A = np.zeros((N, N))
+
     BCcorr = np.zeros(N)
     BCcorr[0] = BCleft_value/ dx**2
     BCcorr[N-1] = BCright_value/ dx**2
-    
 
+    c = np.zeros(N)
+    c[0] = -2
+    if N > 1:
+        c[1] = 1
+    A = sp.linalg.toeplitz(c, c) / dx**2
 
 
 
