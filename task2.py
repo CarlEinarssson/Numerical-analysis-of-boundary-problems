@@ -34,11 +34,9 @@ def FDMd2dx2 (L , BCleft , BCright , N = 100):
     BCcorr[N-1] = BCright_value/ dx**2
 
     c = np.zeros(N)
-    c[0] = 1
+    c[0] = -2
     if N > 1:
-        c[1] = -2
-    if N > 2:
-        c[2] = 1
+        c[1] = 1
     A = sp.linalg.toeplitz(c, c) / dx**2
 
 
